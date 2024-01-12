@@ -1,0 +1,1120 @@
+---
+output:
+  pdf_document: default
+  html_document: default
+---
+# R-codes
+
+## Import dataset
+
+```{r}
+heart <- read.csv("heart.csv")
+attach(heart)
+head(heart)
+```
+
+## Analyse variables
+
+```{r}
+#install.packages("ggpubr")
+library(ggpubr)
+library(ggplot2)
+```
+
+
+### 1) age - age - Numerical
+
+```{r}
+table(age)
+age_hist = ggplot(data = heart, aes(x = age, fill = factor(target))) +
+  geom_histogram(color="black", alpha=0.5, position="identity",bins=15) +
+  labs(title = "age",
+       x = "age",
+       y = "Count") +
+  scale_fill_manual(values = c("aquamarine2", "mediumpurple2"), labels = c("0", "1"), name = "Target") +
+  theme_minimal()
+
+
+```
+
+### 2) sex - sex - Categorical
+
+```{r}
+table(sex)
+sex_bar = ggplot(data = heart, aes(x = factor(sex), fill = factor(target))) +
+  geom_bar(color="black", alpha=0.5) +
+  labs(title = "sex",
+       x = "sex",
+       y = "Count") +
+  scale_fill_manual(values = c("aquamarine2", "mediumpurple2"), labels = c("0", "1"), name = "Target") +
+  theme_minimal()
+
+```
+
+### 3) cp - chest pain type (4 values) - Categorical
+
+```{r}
+table(cp)
+cp_bar = ggplot(data = heart, aes(x = factor(cp), fill = factor(target))) +
+  geom_bar(color="black", alpha=0.5) +
+  labs(title = "cp",
+       x = "cp",
+       y = "Count") +
+  scale_fill_manual(values = c("aquamarine2", "mediumpurple2"), labels = c("0", "1"), name = "Target") +
+  theme_minimal()
+
+```
+
+### 4) trestbps - resting blood pressure - Numerical
+
+```{r}
+table(trestbps)
+
+trestbps_hist = ggplot(data = heart, aes(x = trestbps, fill = factor(target))) +
+  geom_histogram(color="black", alpha=0.5, position="identity",bins=15) +
+  labs(title = "trestbps",
+       x = "trestbps",
+       y = "Count") +
+  scale_fill_manual(values = c("aquamarine2", "mediumpurple2"), labels = c("0", "1"), name = "Target") +
+  theme_minimal()
+
+
+```
+
+### 5) chol - serum cholestoral in mg/dl - Numerical
+
+```{r}
+table(chol)
+
+chol_hist = ggplot(data = heart, aes(x = chol, fill = factor(target))) +
+  geom_histogram(color="black", alpha=0.5, position="identity",bins=15) +
+  labs(title = "chol",
+       x = "chol",
+       y = "Count") +
+  scale_fill_manual(values = c("aquamarine2", "mediumpurple2"), labels = c("0", "1"), name = "Target") +
+  theme_minimal()
+
+```
+
+### 6) fbs - fasting blood sugar \> 120 mg/dl - Categorical
+
+```{r}
+table(fbs)
+fbs_bar = ggplot(data = heart, aes(x = factor(fbs), fill = factor(target))) +
+  geom_bar(color="black", alpha=0.5) +
+  labs(title = "fbs",
+       x = "fbs",
+       y = "Count") +
+  scale_fill_manual(values = c("aquamarine2", "mediumpurple2"), labels = c("0", "1"), name = "Target") +
+  theme_minimal()
+```
+
+### 7) restecg - resting electrocardiographic results (values 0,1,2) - Categorical
+
+```{r}
+table(restecg)
+restecg_bar = ggplot(data = heart, aes(x = factor(restecg), fill = factor(target))) +
+  geom_bar(color="black", alpha=0.5) +
+  labs(title = "restecg",
+       x = "restecg",
+       y = "Count") +
+  scale_fill_manual(values = c("aquamarine2", "mediumpurple2"), labels = c("0", "1"), name = "Target") +
+  theme_minimal()
+```
+
+### 8) thalach - maximum heart rate achieved - Numerical
+
+```{r}
+table(thalach)
+
+thalach_hist = ggplot(data = heart, aes(x = thalach, fill = factor(target))) +
+  geom_histogram(color="black", alpha=0.5, position="identity",bins=15) +
+  labs(title = "thalach",
+       x = "thalach",
+       y = "Count") +
+  scale_fill_manual(values = c("aquamarine2", "mediumpurple2"), labels = c("0", "1"), name = "Target") +
+  theme_minimal()
+```
+
+### 9) exang - exercise induced angina - Categorical
+
+```{r}
+table(exang)
+exang_bar = ggplot(data = heart, aes(x = factor(exang), fill = factor(target))) +
+  geom_bar(color="black", alpha=0.5) +
+  labs(title = "exang",
+       x = "exang",
+       y = "Count") +
+  scale_fill_manual(values = c("aquamarine2", "mediumpurple2"), labels = c("0", "1"), name = "Target") +
+  theme_minimal()
+```
+
+### 10) oldpeak - ST depression induced by exercise relative to rest - Numerical
+
+```{r}
+table(oldpeak)
+
+oldpeak_hist = ggplot(data = heart, aes(x = oldpeak, fill = factor(target))) +
+  geom_histogram(color="black", alpha=0.5, position="identity",bins=15) +
+  labs(title = "oldpeak",
+       x = "oldpeak",
+       y = "Count") +
+  scale_fill_manual(values = c("aquamarine2", "mediumpurple2"), labels = c("0", "1"), name = "Target") +
+  theme_minimal()
+
+```
+
+### 11) slope- the slope of the peak exercise ST segment - Categorical
+
+```{r}
+table(slope)
+slope_bar = ggplot(data = heart, aes(x = factor(slope), fill = factor(target))) +
+  geom_bar(color="black", alpha=0.5) +
+  labs(title = "slope",
+       x = "slope",
+       y = "Count") +
+  scale_fill_manual(values = c("aquamarine2", "mediumpurple2"), labels = c("0", "1"), name = "Target") +
+  theme_minimal()
+```
+
+### 12) ca - number of major vessels (0-3) colored by flourosopy - Categorical
+
+```{r}
+table(ca)
+ca_bar = ggplot(data = heart, aes(x = factor(ca), fill = factor(target))) +
+  geom_bar(color="black", alpha=0.5) +
+  labs(title = "ca",
+       x = "ca",
+       y = "Count") +
+  scale_fill_manual(values = c("aquamarine2", "mediumpurple2"), labels = c("0", "1"), name = "Target") +
+  theme_minimal()
+```
+
+### 13) Target (y)
+
+```{r}
+table(target)
+
+ggplot(data = heart, aes(x = factor(target), fill = factor(target))) +
+  geom_bar(color="black", alpha=0.5) +
+  labs(title = "target",
+       x = "target",
+       y = "Count") +
+  scale_fill_manual(values = c("aquamarine2", "mediumpurple2"), labels = c("0", "1"), name = "Target") +
+  theme_minimal()
+
+
+```
+
+### Categorical plots
+
+```{r}
+categorical_plots <- ggarrange(sex_bar, cp_bar, fbs_bar, restecg_bar,exang_bar, slope_bar, ca_bar, 
+                    #labels = c("sex", "cp", "fbs","restecg","exang","slope","ca"),
+                    ncol = 3, nrow = 3)
+categorical_plots
+```
+
+### Numerical plots
+
+```{r}
+numerical_plots <- ggarrange(age_hist, trestbps_hist, chol_hist, thalach_hist, oldpeak_hist,
+                    ncol = 3, nrow = 2)
+
+numerical_plots
+```
+
+## Multicollinearity for numerical variables
+
+```{r}
+heart_num = data.frame(age,trestbps,chol,thalach,oldpeak)
+cor(heart_num)
+```
+
+## Purposeful Selection
+
+### 1. Construct an initial main-effects model using explanatory variables that include the known important variables and others that show any evidence of being relevant when used as sole predictors (e.g., having P -value \< 0.2).
+
+```{r}
+#Create the base model 
+model_base <- glm(target ~ 1, family=binomial, data=heart)
+summary(model_base)
+```
+
+```{r}
+
+#1 - age - age - Numerical
+model_age <- glm(target ~ age, family = binomial, data=heart)
+a_age = anova(model_base,model_age,test='LRT')
+
+#2 - sex - sex - Categorical
+model_sex <- glm(target ~ sex, family = binomial, data=heart)
+a_sex = anova(model_base,model_sex,test='LRT')
+
+#2 - cp - chest pain type (4 values) - Categorical
+model_cp <- glm(target ~ factor(cp), family = binomial, data=heart)
+a_cp = anova(model_base,model_cp,test='LRT')
+
+#4 - trestbps - resting blood pressure - Numerical
+model_trestbps <- glm(target ~ trestbps, family = binomial, data=heart)
+a_trestbps = anova(model_base,model_trestbps,test='LRT')
+
+#5 - chol - serum cholestoral in mg/dl - Numerical
+model_chol <- glm(target ~ chol, family = binomial, data=heart)
+a_chol = anova(model_base,model_chol,test='LRT')
+
+#6 - fbs - fasting blood sugar \> 120 mg/dl - Categorical
+model_fbs <- glm(target ~ factor(fbs), family = binomial, data=heart)
+a_fbs = anova(model_base,model_fbs,test='LRT')
+
+#7 - restecg - resting electrocardiographic results (values 0,1,2) - Categorical
+model_restecg <- glm(target ~ factor(restecg), family = binomial, data=heart)
+a_restecg = anova(model_base,model_restecg,test='LRT')
+
+#8 - thalach - maximum heart rate achieved  - Numerical 
+model_thalach <- glm(target ~ thalach, family = binomial, data=heart)
+a_thalach = anova(model_base,model_thalach,test='LRT')
+
+#9 - exang - exercise induced angina - Categorical
+model_exang <- glm(target ~ factor(exang), family = binomial, data=heart)
+a_exang = anova(model_base,model_exang,test='LRT')
+
+#10 - oldpeak - ST depression induced by exercise relative to rest - Numerical 
+model_oldpeak <- glm(target ~ oldpeak, family = binomial, data=heart)
+a_oldpeak = anova(model_base,model_oldpeak,test='LRT')
+
+#11 - slope- the slope of the peak exercise ST segment - Categorical 
+model_slope <- glm(target ~ factor(slope), family = binomial, data=heart)
+a_slope = anova(model_base,model_slope,test='LRT')
+
+#12 - ca - number of major vessels (0-3) colored by flourosopy - Categorical
+model_ca <- glm(target ~ factor(ca), family = binomial, data=heart)
+a_ca = anova(model_base,model_ca,test='LRT')
+
+
+```
+
+#### Create table step 1
+
+```{r}
+alpha <- 0.2
+
+Model = c(0,1,2,3,4,5,6,7,8,9,10,11,12)
+ExplanatoryVariables = c('None','ag','se','cp','tr','ch','fb','re','th','ex','ol','sl','ca')
+Deviance = c(model_base$deviance,
+              a_age$`Resid. Dev`[2],
+              a_sex$`Resid. Dev`[2],
+              a_cp$`Resid. Dev`[2],
+              a_trestbps$`Resid. Dev`[2],
+              a_chol$`Resid. Dev`[2],
+              a_fbs$`Resid. Dev`[2],
+              a_restecg$`Resid. Dev`[2],
+              a_thalach$`Resid. Dev`[2],
+              a_exang$`Resid. Dev`[2],
+              a_oldpeak$`Resid. Dev`[2],
+              a_slope$`Resid. Dev`[2],
+              a_ca$`Resid. Dev`[2]
+             )
+df = c(model_base$df.residual,
+    a_age$`Resid. Df`[2],
+    a_sex$`Resid. Df`[2],
+    a_cp$`Resid. Df`[2],
+    a_trestbps$`Resid. Df`[2],
+    a_chol$`Resid. Df`[2],
+    a_fbs$`Resid. Df`[2],
+    a_restecg$`Resid. Df`[2],
+    a_thalach$`Resid. Df`[2],
+    a_exang$`Resid. Df`[2],
+    a_oldpeak$`Resid. Df`[2],
+    a_slope$`Resid. Df`[2],
+    a_ca$`Resid. Df`[2]
+)
+dfDifference = c(NA,
+    a_age$Df[2],
+    a_sex$Df[2],
+    a_cp$Df[2],
+    a_trestbps$Df[2],
+    a_chol$Df[2],
+    a_fbs$Df[2],
+    a_restecg$Df[2],
+    a_thalach$Df[2],
+    a_exang$Df[2],
+    a_oldpeak$Df[2],
+    a_slope$Df[2],
+    a_ca$Df[2]
+   )
+AIC = c(NA,
+    model_age$aic,
+    model_sex$aic,
+    model_cp$aic,
+    model_trestbps$aic,
+    model_chol$aic,
+    model_fbs$aic,
+    model_restecg$aic,
+    model_thalach$aic,
+    model_exang$aic,
+    model_oldpeak$aic,
+    model_slope$aic,
+    model_ca$aic
+   )
+DevianceDifference = c(NA,
+              a_age$Deviance[2],
+              a_sex$Deviance[2],
+              a_cp$Deviance[2],
+              a_trestbps$Deviance[2],
+              a_chol$Deviance[2],
+              a_fbs$Deviance[2],
+              a_restecg$Deviance[2],
+              a_thalach$Deviance[2],
+              a_exang$Deviance[2],
+              a_oldpeak$Deviance[2],
+              a_slope$Deviance[2],
+              a_ca$Deviance[2]
+             )
+Pvalue = c(NA,
+    a_age$`Pr(>Chi)`[2],
+    a_sex$`Pr(>Chi)`[2],
+    a_cp$`Pr(>Chi)`[2],
+    a_trestbps$`Pr(>Chi)`[2],
+    a_chol$`Pr(>Chi)`[2],
+    a_fbs$`Pr(>Chi)`[2],
+    a_restecg$`Pr(>Chi)`[2],
+    a_thalach$`Pr(>Chi)`[2],
+    a_exang$`Pr(>Chi)`[2],
+    a_oldpeak$`Pr(>Chi)`[2],
+    a_slope$`Pr(>Chi)`[2],
+    a_ca$`Pr(>Chi)`[2]
+)
+
+SIGNIFICANT = c(NA,
+    ifelse(a_age$`Pr(>Chi)`[2]< alpha,'YES','NO'),
+    ifelse(a_sex$`Pr(>Chi)`[2]< alpha,'YES','NO'),
+    ifelse(a_cp$`Pr(>Chi)`[2]< alpha,'YES','NO'),
+    ifelse(a_trestbps$`Pr(>Chi)`[2]< alpha,'YES','NO'),
+    ifelse(a_chol$`Pr(>Chi)`[2]< alpha,'YES','NO'),
+    ifelse(a_fbs$`Pr(>Chi)`[2]< alpha,'YES','NO'),
+    ifelse(a_restecg$`Pr(>Chi)`[2]< alpha,'YES','NO'),
+    ifelse(a_thalach$`Pr(>Chi)`[2]< alpha,'YES','NO'),
+    ifelse(a_exang$`Pr(>Chi)`[2]< alpha,'YES','NO'),
+    ifelse(a_oldpeak$`Pr(>Chi)`[2]< alpha,'YES','NO'),
+    ifelse(a_slope$`Pr(>Chi)`[2]< alpha,'YES','NO'),
+    ifelse(a_ca$`Pr(>Chi)`[2]< alpha,'YES','NO')
+)
+
+ModelsCompared = c(NA,
+    '(1)-(0)',
+    '(2)-(0)',
+    '(3)-(0)',
+    '(4)-(0)',
+    '(5)-(0)',
+    '(6)-(0)',
+    '(7)-(0)',
+    '(8)-(0)',
+    '(9)-(0)',
+    '(10)-(0)',
+    '(11)-(0)',
+    '(12)-(0)')
+step1 = data.frame(
+  Model,ExplanatoryVariables,Deviance,df,AIC,ModelsCompared,DevianceDifference,dfDifference,Pvalue,SIGNIFICANT
+)
+
+step1
+
+
+```
+
+### 2. Conduct backward elimination, keeping a variable if it is either significant at a somewhat more stringent level or shows evidence of being a relevant confounder, in the sense that the estimated effect of a key variable changes substantially when it is removed.
+
+Variables codes:
+
+-   ag - age - Numerical
+
+-   se - sex - Categorical
+
+-   cp - cp - Categorical
+
+-   tr - trestbps - Numerical
+
+-   ch - chol - Numerical
+
+-   fb - fbs - Categorical
+
+-   re - restecg - Categorical
+
+-   th - thalach - Numerical
+
+-   ex - exang - Categorical
+
+-   ol - oldpeak - Numerical
+
+-   sl - slope - Categorical
+
+-   ca - ca - Categorical
+
+```{r}
+#new model with the significant variables from step1
+model_ag.se.cp.tr.ch.re.th.ex.ol.sl.ca <- glm(target ~ age+factor(sex)+factor(cp)+trestbps+chol+factor(restecg)+thalach+factor(exang)+oldpeak+factor(slope)+factor(ca), family = binomial, data=heart)
+step1_base = anova(model_base,model_ag.se.cp.tr.ch.re.th.ex.ol.sl.ca,test='LRT')
+
+#DROP ag - age - Numerical
+model_se.cp.tr.ch.re.th.ex.ol.sl.ca <- glm(target ~ factor(sex)+factor(cp)+trestbps+chol+factor(restecg)+thalach+factor(exang)+oldpeak+factor(slope)+factor(ca),
+                                           family = binomial, data=heart)
+drop_age = anova(model_se.cp.tr.ch.re.th.ex.ol.sl.ca,model_ag.se.cp.tr.ch.re.th.ex.ol.sl.ca,test='LRT')
+
+#DROP se - sex - Categorical
+model_ag.cp.tr.ch.re.th.ex.ol.sl.ca <- glm(target ~ age+factor(cp)+trestbps+chol+factor(restecg)+thalach+factor(exang)+oldpeak+factor(slope)+factor(ca), 
+                                           family = binomial, data=heart)
+drop_sex = anova(model_ag.cp.tr.ch.re.th.ex.ol.sl.ca,model_ag.se.cp.tr.ch.re.th.ex.ol.sl.ca,test='LRT')
+
+#DROP cp - cp - Categorical
+model_ag.se.tr.ch.re.th.ex.ol.sl.ca <- glm(target ~ age+factor(sex)+trestbps+chol+factor(restecg)+thalach+factor(exang)+oldpeak+factor(slope)+factor(ca), 
+                                           family = binomial, data=heart)
+drop_cp = anova(model_ag.se.tr.ch.re.th.ex.ol.sl.ca,model_ag.se.cp.tr.ch.re.th.ex.ol.sl.ca,test='LRT')
+
+#DROP tr - trestbps - Numerical
+model_ag.se.cp.ch.re.th.ex.ol.sl.ca <- glm(target ~ age+factor(sex)+factor(cp)+chol+factor(restecg)+thalach+factor(exang)+oldpeak+factor(slope)+factor(ca), 
+                                           family = binomial, data=heart)
+drop_trestbps = anova(model_ag.se.cp.ch.re.th.ex.ol.sl.ca,model_ag.se.cp.tr.ch.re.th.ex.ol.sl.ca,test='LRT')
+
+#DROP ch - chol - Numerical
+model_ag.se.cp.tr.re.th.ex.ol.sl.ca <- glm(target ~ age+factor(sex)+factor(cp)+trestbps+factor(restecg)+thalach+factor(exang)+oldpeak+factor(slope)+factor(ca), 
+                                           family = binomial, data=heart)
+drop_chol = anova(model_ag.se.cp.tr.re.th.ex.ol.sl.ca,model_ag.se.cp.tr.ch.re.th.ex.ol.sl.ca,test='LRT')
+
+#DROP re - restecg - Categorical
+model_ag.se.cp.tr.ch.th.ex.ol.sl.ca <- glm(target ~ age+factor(sex)+factor(cp)+trestbps+chol+thalach+factor(exang)+oldpeak+factor(slope)+factor(ca), 
+                                           family = binomial, data=heart)
+drop_restecg = anova(model_ag.se.cp.tr.ch.th.ex.ol.sl.ca,model_ag.se.cp.tr.ch.re.th.ex.ol.sl.ca,test='LRT')
+
+#DROP th - thalach - Numerical
+model_ag.se.cp.tr.ch.re.ex.ol.sl.ca <- glm(target ~ age+factor(sex)+factor(cp)+trestbps+chol+factor(restecg)+factor(exang)+oldpeak+factor(slope)+factor(ca), 
+                                           family = binomial, data=heart)
+drop_thalach = anova(model_ag.se.cp.tr.ch.re.ex.ol.sl.ca,model_ag.se.cp.tr.ch.re.th.ex.ol.sl.ca,test='LRT')
+
+#DROP ex - exang - Categorical
+model_ag.se.cp.tr.ch.re.th.ol.sl.ca <- glm(target ~ age+factor(sex)+factor(cp)+trestbps+chol+factor(restecg)+thalach+oldpeak+factor(slope)+factor(ca), 
+                                           family = binomial, data=heart)
+drop_exang = anova(model_ag.se.cp.tr.ch.re.th.ol.sl.ca,model_ag.se.cp.tr.ch.re.th.ex.ol.sl.ca,test='LRT')
+
+#DROP ol - oldpeak - Numerical
+model_ag.se.cp.tr.ch.re.th.ex.sl.ca <- glm(target ~ age+factor(sex)+factor(cp)+trestbps+chol+factor(restecg)+thalach+factor(exang)+factor(slope)+factor(ca), 
+                                           family = binomial, data=heart)
+drop_oldpeak = anova(model_ag.se.cp.tr.ch.re.th.ex.sl.ca,model_ag.se.cp.tr.ch.re.th.ex.ol.sl.ca,test='LRT')
+
+#DROP sl - slope - Numerical
+model_ag.se.cp.tr.ch.re.th.ex.ol.ca <- glm(target ~ age+factor(sex)+factor(cp)+trestbps+chol+factor(restecg)+thalach+factor(exang)+oldpeak+factor(ca), 
+                                           family = binomial, data=heart)
+drop_slope = anova(model_ag.se.cp.tr.ch.re.th.ex.ol.ca,model_ag.se.cp.tr.ch.re.th.ex.ol.sl.ca,test='LRT')
+
+#DROP ca - ca - Categorical
+model_ag.se.cp.tr.ch.re.th.ex.ol.sl <- glm(target ~ age+factor(sex)+factor(cp)+trestbps+chol+factor(restecg)+thalach+factor(exang)+oldpeak+factor(slope), 
+                                           family = binomial, data=heart)
+drop_ca = anova(model_ag.se.cp.tr.ch.re.th.ex.ol.sl,model_ag.se.cp.tr.ch.re.th.ex.ol.sl.ca,test='LRT')
+
+```
+
+#### Create table step 2
+
+```{r}
+alpha2 <- 0.05
+
+Model2 = c(13,14,15,16,17,18,19,20,21,22,23,24)
+ExplanatoryVariables2 = c(
+    'ag+se+cp+tr+ch+re+th+ex+ol+sl+ca',
+    'se+cp+tr+ch+re+th+ex+ol+sl+ca',
+    'ag+cp+tr+ch+re+th+ex+ol+sl+ca',
+    'ag+se+tr+ch+re+th+ex+ol+sl+ca',
+    'ag+se+cp+ch+re+th+ex+ol+sl+ca',
+    'ag+se+cp+tr+re+th+ex+ol+sl+ca',
+    'ag+se+cp+tr+ch+th+ex+ol+sl+ca',
+    'ag+se+cp+tr+ch+re+ex+ol+sl+ca',
+    'ag+se+cp+tr+ch+re+th+ol+sl+ca',
+    'ag+se+cp+tr+ch+re+th+ex+sl+ca',
+    'ag+se+cp+tr+ch+re+th+ex+ol+ca',
+    'ag+se+cp+tr+ch+re+th+ex+ol+sl'
+)
+
+Deviance2 = c(step1_base$`Resid. Dev`[1],
+              drop_age$`Resid. Dev`[1],
+              drop_sex$`Resid. Dev`[1],
+              drop_cp$`Resid. Dev`[1],
+              drop_trestbps$`Resid. Dev`[1],
+              drop_chol$`Resid. Dev`[1],
+              drop_restecg$`Resid. Dev`[1],
+              drop_thalach$`Resid. Dev`[1],
+              drop_exang$`Resid. Dev`[1],
+              drop_oldpeak$`Resid. Dev`[1],
+              drop_slope$`Resid. Dev`[1],
+              drop_ca$`Resid. Dev`[1]
+             )
+df2 = c(step1_base$`Resid. Df`[1],
+    drop_age$`Resid. Df`[1],
+    drop_sex$`Resid. Df`[1],
+    drop_cp$`Resid. Df`[1],
+    drop_trestbps$`Resid. Df`[1],
+    drop_chol$`Resid. Df`[1],
+    drop_restecg$`Resid. Df`[1],
+    drop_thalach$`Resid. Df`[1],
+    drop_exang$`Resid. Df`[1],
+    drop_oldpeak$`Resid. Df`[1],
+    drop_slope$`Resid. Df`[1],
+    drop_ca$`Resid. Df`[1]
+)
+dfDifference2 = c(step1_base$Df[2],
+    drop_age$Df[2],
+    drop_sex$Df[2],
+    drop_cp$Df[2],
+    drop_trestbps$Df[2],
+    drop_chol$Df[2],
+    drop_restecg$Df[2],
+    drop_thalach$Df[2],
+    drop_exang$Df[2],
+    drop_oldpeak$Df[2],
+    drop_slope$Df[2],
+    drop_ca$Df[2]
+   )
+AIC2 = c(model_ag.se.cp.tr.ch.re.th.ex.ol.sl.ca$aic,
+    model_se.cp.tr.ch.re.th.ex.ol.sl.ca$aic,
+    model_ag.cp.tr.ch.re.th.ex.ol.sl.ca$aic,
+    model_ag.se.tr.ch.re.th.ex.ol.sl.ca$aic,
+    model_ag.se.cp.ch.re.th.ex.ol.sl.ca$aic,
+    model_ag.se.cp.tr.re.th.ex.ol.sl.ca$aic,
+    model_ag.se.cp.tr.ch.th.ex.ol.sl.ca$aic,
+    model_ag.se.cp.tr.ch.re.ex.ol.sl.ca$aic,
+    model_ag.se.cp.tr.ch.re.th.ol.sl.ca$aic,
+    model_ag.se.cp.tr.ch.re.th.ex.sl.ca$aic,
+    model_ag.se.cp.tr.ch.re.th.ex.ol.ca$aic,
+    model_ag.se.cp.tr.ch.re.th.ex.ol.sl$aic
+ )
+DevianceDifference2 = c(step1_base$Deviance[2],
+              drop_age$Deviance[2],
+              drop_sex$Deviance[2],
+              drop_cp$Deviance[2],
+              drop_trestbps$Deviance[2],
+              drop_chol$Deviance[2],
+              drop_restecg$Deviance[2],
+              drop_thalach$Deviance[2],
+              drop_exang$Deviance[2],
+              drop_oldpeak$Deviance[2],
+              drop_slope$Deviance[2],
+              drop_ca$Deviance[2]
+             )
+Pvalue2 = c(step1_base$`Pr(>Chi)`[2],
+    drop_age$`Pr(>Chi)`[2],
+    drop_sex$`Pr(>Chi)`[2],
+    drop_cp$`Pr(>Chi)`[2],
+    drop_trestbps$`Pr(>Chi)`[2],
+    drop_chol$`Pr(>Chi)`[2],
+    drop_restecg$`Pr(>Chi)`[2],
+    drop_thalach$`Pr(>Chi)`[2],
+    drop_exang$`Pr(>Chi)`[2],
+    drop_oldpeak$`Pr(>Chi)`[2],
+    drop_slope$`Pr(>Chi)`[2],
+    drop_ca$`Pr(>Chi)`[2]
+)
+
+SIGNIFICANT2 = c(
+    ifelse(step1_base$`Pr(>Chi)`[2]< alpha2,'YES','NO'),
+    ifelse(drop_age$`Pr(>Chi)`[2]< alpha2,'YES','NO'),
+    ifelse(drop_sex$`Pr(>Chi)`[2]< alpha2,'YES','NO'),
+    ifelse(drop_cp$`Pr(>Chi)`[2]< alpha2,'YES','NO'),
+    ifelse(drop_trestbps$`Pr(>Chi)`[2]< alpha2,'YES','NO'),
+    ifelse(drop_chol$`Pr(>Chi)`[2]< alpha2,'YES','NO'),
+    ifelse(drop_restecg$`Pr(>Chi)`[2]< alpha2,'YES','NO'),
+    ifelse(drop_thalach$`Pr(>Chi)`[2]< alpha2,'YES','NO'),
+    ifelse(drop_exang$`Pr(>Chi)`[2]< alpha2,'YES','NO'),
+    ifelse(drop_oldpeak$`Pr(>Chi)`[2]< alpha2,'YES','NO'),
+    ifelse(drop_slope$`Pr(>Chi)`[2]< alpha2,'YES','NO'),
+    ifelse(drop_ca$`Pr(>Chi)`[2]< alpha2,'YES','NO')
+)
+
+ModelsCompared2 = c('(13)-(0)',
+                  '(13)-(14)',
+                  '(13)-(15)',
+                  '(13)-(16)',
+                  '(13)-(17)',
+                  '(13)-(18)',
+                  '(13)-(19)',
+                  '(13)-(20)',
+                  '(13)-(21)',
+                  '(13)-(22)',
+                  '(13)-(23)',
+                  '(13)-(24)')
+step2 = data.frame(
+  Model2,ExplanatoryVariables2,Deviance2,df2,AIC2,ModelsCompared2,DevianceDifference2,dfDifference2,Pvalue2,SIGNIFICANT2
+)
+
+step2
+
+```
+
+### 3. Add to the model any variables that were not included in step1 but that are significant when adjusting for the variables in the model after step 2, since a variable may not be significantly associated with y but may make an important contribution in the presence of other variables.
+
+-   se - sex - Categorical
+
+-   cp - cp - Categorical
+
+-   tr - trestbps - Numerical
+
+-   ex - exang - Categorical
+
+-   sl - slope - Numerical
+
+-   ca - ca - Categorical
+
+-   Add fb - fbs - Categorical
+
+```{r}
+#useful model until now
+model_se.cp.tr.ex.sl.ca <- glm(target ~ factor(sex)+factor(cp)+trestbps+factor(exang)+factor(slope)+factor(ca), family = binomial, data=heart)
+step3_model = anova(model_se.cp.tr.ex.sl.ca,model_ag.se.cp.tr.ch.re.th.ex.ol.sl.ca,test='LRT') #13
+
+#add fbs
+model_se.cp.tr.ex.sl.ca.fb <- glm(target ~ factor(sex)+factor(cp)+trestbps+factor(exang)+factor(slope)+factor(ca)+factor(fbs), family = binomial, data=heart)
+add_fbs = anova(model_se.cp.tr.ex.sl.ca,model_se.cp.tr.ex.sl.ca.fb,test='LRT')
+
+```
+
+#### Create table step 3
+
+```{r}
+alpha3 <- 0.05
+
+Model3 = c(25,26)
+ExplanatoryVariables3 = c('se+cp+tr+ex+sl+ca','se+cp+tr+ex+sl+ca+fb')
+Deviance3 = c(NA,
+              add_fbs$`Resid. Dev`[2]
+             )
+df3 = c(NA,
+    add_fbs$`Resid. Df`[2]
+)
+dfDifference3 = c(NA,
+    add_fbs$Df[2]
+   )
+AIC3 = c(model_ag.se.cp.tr.ch.re.th.ex.ol.sl.ca$aic,
+    model_se.cp.tr.ex.sl.ca.fb$aic
+   )
+DevianceDifference3 = c(NA,
+              add_fbs$Deviance[2]
+             )
+
+Pvalue3 = c(NA,
+    add_fbs$`Pr(>Chi)`[2]
+)
+
+SIGNIFICANT3 = c(
+    NA,
+    ifelse(add_fbs$`Pr(>Chi)`[2]< alpha3,'YES','NO')
+)
+
+ModelsCompared3 = c('(25)-(13)',
+                  '(26)-(25)')
+step3 = data.frame(
+  Model3,ExplanatoryVariables3,Deviance3,df3,AIC3,ModelsCompared3,DevianceDifference3,dfDifference3,Pvalue3,SIGNIFICANT3
+)
+
+
+
+```
+
+```{r}
+step3
+```
+
+### 4 Check for plausible interactions among variables in the model after step 3, using significance tests at conventional levels such as 0.05.
+
+-   se - sex - Categorical
+
+-   cp - cp - Categorical
+
+-   tr - trestbps - Numerical
+
+-   ex - exang - Categorical
+
+-   sl - slope - Numerical
+
+-   ca - ca - Categorical
+
+```{r}
+#useful model until now
+model_se.cp.tr.ex.sl.ca <- glm(target ~ factor(sex)+factor(cp)+trestbps+factor(exang)+factor(slope)+factor(ca), family = binomial, data=heart)
+
+# interaction between sex and cp
+model_se.cp.tr.ex.sl.ca_se.cp <- glm(target ~ factor(sex)+factor(cp)+trestbps+factor(exang)+factor(slope)+factor(ca)+factor(sex):factor(cp), family = binomial, data=heart)
+int_sex_cp = anova(model_se.cp.tr.ex.sl.ca,model_se.cp.tr.ex.sl.ca_se.cp,test='LRT')
+
+# interaction between sex and trestbps
+model_se.cp.tr.ex.sl.ca_se.tr <- glm(target ~ factor(sex)+factor(cp)+trestbps+factor(exang)+factor(slope)+factor(ca)+factor(sex):trestbps, family = binomial, data=heart)
+int_sex_trestbps = anova(model_se.cp.tr.ex.sl.ca,model_se.cp.tr.ex.sl.ca_se.tr,test='LRT')
+
+# interaction between sex and exang
+model_se.cp.tr.ex.sl.ca_se.ex <- glm(target ~ factor(sex)+factor(cp)+trestbps+factor(exang)+factor(slope)+factor(ca)+factor(sex):factor(exang), family = binomial, data=heart)
+int_sex_exang = anova(model_se.cp.tr.ex.sl.ca,model_se.cp.tr.ex.sl.ca_se.ex,test='LRT')
+
+# interaction between sex and slope
+model_se.cp.tr.ex.sl.ca_se.sl <- glm(target ~ factor(sex)+factor(cp)+trestbps+factor(exang)+factor(slope)+factor(ca)+factor(sex):slope, family = binomial, data=heart)
+int_sex_slope = anova(model_se.cp.tr.ex.sl.ca,model_se.cp.tr.ex.sl.ca_se.sl,test='LRT')
+
+# interaction between sex and ca
+model_se.cp.tr.ex.sl.ca_se.ca <- glm(target ~ factor(sex)+factor(cp)+trestbps+factor(exang)+factor(slope)+factor(ca)+factor(sex):factor(ca), family = binomial, data=heart)
+int_sex_ca = anova(model_se.cp.tr.ex.sl.ca,model_se.cp.tr.ex.sl.ca_se.ca,test='LRT')
+
+```
+
+```{r}
+
+###cp
+
+# interaction between cp and trestbps
+model_se.cp.tr.ex.sl.ca_cp.tr <- glm(target ~ factor(sex)+factor(cp)+trestbps+factor(exang)+factor(slope)+factor(ca)+factor(cp):trestbps, 
+                                        family = binomial, data=heart)
+int_cp_trestbps = anova(model_se.cp.tr.ex.sl.ca,model_se.cp.tr.ex.sl.ca_cp.tr,test='LRT')
+
+# interaction between cp and exang
+model_se.cp.tr.ex.sl.ca_cp.ex <- glm(target ~ factor(sex)+factor(cp)+trestbps+factor(exang)+factor(slope)+factor(ca)+factor(cp):factor(exang), 
+                                        family = binomial, data=heart)
+int_cp_exang = anova(model_se.cp.tr.ex.sl.ca,model_se.cp.tr.ex.sl.ca_cp.ex,test='LRT')
+
+# interaction between cp and slope
+model_se.cp.tr.ex.sl.ca_cp.sl <- glm(target ~ factor(sex)+factor(cp)+trestbps+factor(exang)+factor(slope)+factor(ca)+factor(cp):slope, 
+                                        family = binomial, data=heart)
+int_cp_slope = anova(model_se.cp.tr.ex.sl.ca,model_se.cp.tr.ex.sl.ca_cp.sl,test='LRT')
+
+# interaction between cp and ca
+model_se.cp.tr.ex.sl.ca_cp.ca <- glm(target ~ factor(sex)+factor(cp)+trestbps+factor(exang)+factor(slope)+factor(ca)+factor(cp):factor(ca), 
+                                        family = binomial, data=heart)
+int_cp_ca = anova(model_se.cp.tr.ex.sl.ca,model_se.cp.tr.ex.sl.ca_cp.ca,test='LRT')
+```
+
+```{r}
+
+###trestbps
+
+# interaction between trestbps and exang
+model_se.cp.tr.ex.sl.ca_tr.ex <- glm(target ~ factor(sex)+factor(cp)+trestbps+factor(exang)+factor(slope)+factor(ca)+trestbps:factor(exang), 
+                                        family = binomial, data=heart)
+int_trestbps_exang = anova(model_se.cp.tr.ex.sl.ca,model_se.cp.tr.ex.sl.ca_tr.ex,test='LRT')
+
+# interaction between trestbps and slope
+model_se.cp.tr.ex.sl.ca_tr.sl <- glm(target ~ factor(sex)+factor(cp)+trestbps+factor(exang)+factor(slope)+factor(ca)+trestbps:slope, 
+                                        family = binomial, data=heart)
+int_trestbps_slope = anova(model_se.cp.tr.ex.sl.ca,model_se.cp.tr.ex.sl.ca_tr.sl,test='LRT')
+
+# interaction between trestbps and ca
+model_se.cp.tr.ex.sl.ca_tr.ca <- glm(target ~ factor(sex)+factor(cp)+trestbps+factor(exang)+factor(slope)+factor(ca)+trestbps:factor(ca), 
+                                        family = binomial, data=heart)
+int_trestbps_ca = anova(model_se.cp.tr.ex.sl.ca,model_se.cp.tr.ex.sl.ca_tr.ca,test='LRT')
+
+```
+
+```{r}
+
+#exang
+
+# interaction between exang and slope
+model_se.cp.tr.ex.sl.ca_ex.sl <- glm(target ~ factor(sex)+factor(cp)+trestbps+factor(exang)+factor(slope)+factor(ca)+factor(exang):slope, 
+                                        family = binomial, data=heart)
+int_exang_slope = anova(model_se.cp.tr.ex.sl.ca,model_se.cp.tr.ex.sl.ca_ex.sl,test='LRT')
+
+# interaction between exang and ca
+model_se.cp.tr.ex.sl.ca_ex.ca <- glm(target ~ factor(sex)+factor(cp)+trestbps+factor(exang)+factor(slope)+factor(ca)+factor(exang):factor(ca), 
+                                     family = binomial, data=heart)
+int_exang_ca = anova(model_se.cp.tr.ex.sl.ca,model_se.cp.tr.ex.sl.ca_ex.ca,test='LRT')
+
+```
+
+```{r}
+
+#slope
+
+# interaction between slope and ca
+model_se.cp.tr.ex.sl.ca_sl.ca <- glm(target ~ factor(sex)+factor(cp)+trestbps+factor(exang)+factor(slope)+factor(ca)+factor(slope):factor(ca), 
+                                        family = binomial, data=heart)
+int_slope_ca = anova(model_se.cp.tr.ex.sl.ca,model_se.cp.tr.ex.sl.ca_sl.ca,test='LRT')
+
+```
+
+#### Create table step 4
+
+```{r}
+alpha4 <- 0.05
+
+Model4 = c(27,28,29,30,31,32,33,34,35,36,37,38,39,40,41)
+
+ExplanatoryVariables4 = c(
+    'se+cp+tr+ex+sl+ca+se*cp'
+    ,'se+cp+tr+ex+sl+ca+se*tr'
+    ,'se+cp+tr+ex+sl+ca+se*ex'
+    ,'se+cp+tr+ex+sl+ca+se*sl'
+    ,'se+cp+tr+ex+sl+ca+se*ca'
+    ,'se+cp+tr+ex+sl+ca+cp*tr'
+    ,'se+cp+tr+ex+sl+ca+cp*ex'
+    ,'se+cp+tr+ex+sl+ca+cp*sl'
+    ,'se+cp+tr+ex+sl+ca+cp*ca'
+    ,'se+cp+tr+ex+sl+ca+tr*ex'
+    ,'se+cp+tr+ex+sl+ca+tr*sl'
+    ,'se+cp+tr+ex+sl+ca+tr*ca'
+    ,'se+cp+tr+ex+sl+ca+ex*sl'
+    ,'se+cp+tr+ex+sl+ca+ex*ca'
+    ,'se+cp+tr+ex+sl+ca+sl*ca')
+
+
+Deviance4 = c(
+    int_sex_cp$`Resid. Dev`[2],
+    int_sex_trestbps$`Resid. Dev`[2],
+    int_sex_exang$`Resid. Dev`[2],
+    int_sex_slope$`Resid. Dev`[2],
+    int_sex_ca$`Resid. Dev`[2],
+    int_cp_trestbps$`Resid. Dev`[2],
+    int_cp_exang$`Resid. Dev`[2],
+    int_cp_slope$`Resid. Dev`[2],
+    int_cp_ca$`Resid. Dev`[2],
+    int_trestbps_exang$`Resid. Dev`[2],
+    int_trestbps_slope$`Resid. Dev`[2],
+    int_trestbps_ca$`Resid. Dev`[2],
+    int_exang_slope$`Resid. Dev`[2],
+    int_exang_ca$`Resid. Dev`[2],
+    int_slope_ca$`Resid. Dev`[2]
+)
+
+df4 = c(
+    int_sex_cp$`Resid. Df`[2],
+    int_sex_trestbps$`Resid. Df`[2],
+    int_sex_exang$`Resid. Df`[2],
+    int_sex_slope$`Resid. Df`[2],
+    int_sex_ca$`Resid. Df`[2],
+    int_cp_trestbps$`Resid. Df`[2],
+    int_cp_exang$`Resid. Df`[2],
+    int_cp_slope$`Resid. Df`[2],
+    int_cp_ca$`Resid. Df`[2],
+    int_trestbps_exang$`Resid. Df`[2],
+    int_trestbps_slope$`Resid. Df`[2],
+    int_trestbps_ca$`Resid. Df`[2],
+    int_exang_slope$`Resid. Df`[2],
+    int_exang_ca$`Resid. Df`[2],
+    int_slope_ca$`Resid. Df`[2]
+)
+
+dfDifference4 = c(
+    int_sex_cp$Df[2],
+    int_sex_trestbps$Df[2],
+    int_sex_exang$Df[2],
+    int_sex_slope$Df[2],
+    int_sex_ca$Df[2],
+    int_cp_trestbps$Df[2],
+    int_cp_exang$Df[2],
+    int_cp_slope$Df[2],
+    int_cp_ca$Df[2],
+    int_trestbps_exang$Df[2],
+    int_trestbps_slope$Df[2],
+    int_trestbps_ca$Df[2],
+    int_exang_slope$Df[2],
+    int_exang_ca$Df[2],
+    int_slope_ca$Df[2]    
+)
+
+AIC4 = c(
+    model_se.cp.tr.ex.sl.ca_se.cp$aic,
+    model_se.cp.tr.ex.sl.ca_se.tr$aic,
+    model_se.cp.tr.ex.sl.ca_se.ex$aic,
+    model_se.cp.tr.ex.sl.ca_se.sl$aic,
+    model_se.cp.tr.ex.sl.ca_se.ca$aic,
+    model_se.cp.tr.ex.sl.ca_cp.tr$aic,
+    model_se.cp.tr.ex.sl.ca_cp.ex$aic,
+    model_se.cp.tr.ex.sl.ca_cp.sl$aic,
+    model_se.cp.tr.ex.sl.ca_cp.ca$aic,
+    model_se.cp.tr.ex.sl.ca_tr.ex$aic,
+    model_se.cp.tr.ex.sl.ca_tr.sl$aic,
+    model_se.cp.tr.ex.sl.ca_tr.ca$aic,
+    model_se.cp.tr.ex.sl.ca_ex.sl$aic,
+    model_se.cp.tr.ex.sl.ca_ex.ca$aic,
+    model_se.cp.tr.ex.sl.ca_sl.ca$aic
+)
+
+DevianceDifference4 = c(
+    int_sex_cp$Deviance[2],
+    int_sex_trestbps$Deviance[2],
+    int_sex_exang$Deviance[2],
+    int_sex_slope$Deviance[2],
+    int_sex_ca$Deviance[2],
+    int_cp_trestbps$Deviance[2],
+    int_cp_exang$Deviance[2],
+    int_cp_slope$Deviance[2],
+    int_cp_ca$Deviance[2],
+    int_trestbps_exang$Deviance[2],
+    int_trestbps_slope$Deviance[2],
+    int_trestbps_ca$Deviance[2],
+    int_exang_slope$Deviance[2],
+    int_exang_ca$Deviance[2],
+    int_slope_ca$Deviance[2]    
+)
+Pvalue4 = c(
+    int_sex_cp$`Pr(>Chi)`[2],
+    int_sex_trestbps$`Pr(>Chi)`[2],
+    int_sex_exang$`Pr(>Chi)`[2],
+    int_sex_slope$`Pr(>Chi)`[2],
+    int_sex_ca$`Pr(>Chi)`[2],
+    int_cp_trestbps$`Pr(>Chi)`[2],
+    int_cp_exang$`Pr(>Chi)`[2],
+    int_cp_slope$`Pr(>Chi)`[2],
+    int_cp_ca$`Pr(>Chi)`[2],
+    int_trestbps_exang$`Pr(>Chi)`[2],
+    int_trestbps_slope$`Pr(>Chi)`[2],
+    int_trestbps_ca$`Pr(>Chi)`[2],
+    int_exang_slope$`Pr(>Chi)`[2],
+    int_exang_ca$`Pr(>Chi)`[2],
+    int_slope_ca$`Pr(>Chi)`[2]
+)
+
+SIGNIFICANT4 = c(
+    ifelse(int_sex_cp$`Pr(>Chi)`[2]< alpha4,'YES','NO'),
+    ifelse(int_sex_trestbps$`Pr(>Chi)`[2]< alpha4,'YES','NO'),
+    ifelse(int_sex_exang$`Pr(>Chi)`[2]< alpha4,'YES','NO'),
+    ifelse(int_sex_slope$`Pr(>Chi)`[2]< alpha4,'YES','NO'),
+    ifelse(int_sex_ca$`Pr(>Chi)`[2]< alpha4,'YES','NO'),
+    ifelse(int_cp_trestbps$`Pr(>Chi)`[2]< alpha4,'YES','NO'),
+    ifelse(int_cp_exang$`Pr(>Chi)`[2]< alpha4,'YES','NO'),
+    ifelse(int_cp_slope$`Pr(>Chi)`[2]< alpha4,'YES','NO'),
+    ifelse(int_cp_ca$`Pr(>Chi)`[2]< alpha4,'YES','NO'),
+    ifelse(int_trestbps_exang$`Pr(>Chi)`[2]< alpha4,'YES','NO'),
+    ifelse(int_trestbps_slope$`Pr(>Chi)`[2]< alpha4,'YES','NO'),
+    ifelse(int_trestbps_ca$`Pr(>Chi)`[2]< alpha4,'YES','NO'),
+    ifelse(int_exang_slope$`Pr(>Chi)`[2]< alpha4,'YES','NO'),
+    ifelse(int_exang_ca$`Pr(>Chi)`[2]< alpha4,'YES','NO'),
+    ifelse(int_slope_ca$`Pr(>Chi)`[2]< alpha4,'YES','NO')
+)
+
+                  
+ModelsCompared4 = c(
+    '(27)-(25)',
+    '(28)-(25)',
+    '(29)-(25)',
+    '(30)-(25)',
+    '(31)-(25)',
+    '(32)-(25)',
+    '(33)-(25)',
+    '(34)-(25)',
+    '(35)-(25)',
+    '(36)-(25)',
+    '(37)-(25)',
+    '(38)-(25)',
+    '(39)-(25)',
+    '(40)-(25)',
+    '(41)-(25)'
+)
+
+step4 = data.frame(
+    Model4,ExplanatoryVariables4,Deviance4,df4,AIC4,ModelsCompared4,DevianceDifference4,dfDifference4,Pvalue4,SIGNIFICANT4
+)
+
+
+
+```
+
+```{r}
+step4
+
+```
+
+## Purposeful Selection final model
+
+```{r}
+##useful model
+modelPS = model_se.cp.tr.ex.sl.ca
+summary(modelPS)
+
+```
+
+## AIC as categorical
+
+```{r}
+##Step wise: smaller AIC is better
+completeModel <- glm(target ~ age+factor(sex)+factor(cp)+trestbps+chol+factor(fbs)
+                                              +factor(restecg)+thalach+factor(exang)+oldpeak+factor(slope)+factor(ca), 
+                                              family = binomial, data=heart)
+
+# stepwise backward selection using AIC
+library(MASS)
+stepAIC(completeModel) 
+
+```
+
+### AIC model
+
+```{r}
+modelAIC <- glm(target ~ thalach+oldpeak+factor(exang)+trestbps+factor(slope)+factor(cp)+factor(sex)+factor(ca),
+                family = binomial, data=heart)
+summary(modelAIC)
+
+```
+
+## 3. BIC as numerical
+
+```{r}
+##bestglm with BIC
+library(leaps)
+library(bestglm)
+bestglm(heart, family=binomial, IC="BIC")
+
+```
+
+### BIC model
+
+```{r}
+#modelBIC
+modelBIC <- glm(target ~ sex+cp+thalach+exang+oldpeak+ca, family = binomial, data=heart)
+summary(modelBIC)
+
+```
+
+## ROC curve
+
+```{r}
+
+library(pROC)
+rocplot_1 <- roc(target ~ fitted(modelPS), data=heart)
+rocplot_2 <- roc(target ~ fitted(modelAIC), data=heart)
+rocplot_3 <- roc(target ~ fitted(modelBIC), data=heart)
+plot.roc(rocplot_1, legacy.axes=TRUE, col ="green") 
+plot.roc(rocplot_2, legacy.axes=TRUE, add = TRUE, col="purple") 
+plot.roc(rocplot_3, legacy.axes=TRUE, add = TRUE, col="yellow") 
+legend("bottomright",c('modelPS',
+                   'modelAIC',
+                   'modelBIC'), 
+       lty=c(1, 1), col=c("green", "purple","yellow"), cex=0.7)
+
+print('modelPS: ')
+modelPS$formula
+print('modelAIC: ')
+modelAIC$formula
+print('modelBIC: ')
+modelBIC$formula
+
+data.frame(modelPS = auc(rocplot_1),
+           modelAIC = auc(rocplot_2),
+           modelBIC = auc(rocplot_3))
+```
+
+## AIC values
+
+```{r}
+data.frame(modelSS = AIC(modelPS),
+           modelAIC = AIC(modelAIC),
+           modelBIC = AIC(modelBIC))
+
+```
+
+## Summarizing Predictive Power: Multiple Correlation (R)
+
+```{r}
+
+R1 = cor(target, fitted(modelPS))
+R2 = cor(target, fitted(modelAIC))
+R3 = cor(target, fitted(modelBIC))
+
+data.frame(modelPS = R1,
+           modelAIC = R2,
+           modelBIC = R3)
+
+
+```
